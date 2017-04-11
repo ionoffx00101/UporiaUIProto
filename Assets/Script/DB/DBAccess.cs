@@ -23,7 +23,8 @@ public class DBAccess : MonoBehaviour
         // IDbCommand
         IDbCommand dbcmd = dbconn.CreateCommand();
         // sql문장 = "SELECT 조회할 컬럼 FROM 조회할 테이블";
-        string sqlQuery = "SELECT Score_id,Score_score,Player_id FROM Score";
+        // string sqlQuery = "SELECT Score_id,Score_score,Player_id FROM Score"; // 그냥 조회
+        string sqlQuery = "SELECT Score_id,Score_score,Player_id FROM Score order by score_score desc"; // score 높은 순으로 정렬
         dbcmd.CommandText = sqlQuery;
 
         // IDataReader
