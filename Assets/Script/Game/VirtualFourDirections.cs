@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class VirtualFourDirections : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     private Image bigStick;
     private Image smallStick;

@@ -10,6 +10,8 @@ public class SceneChangeInMain : MonoBehaviour {
 
     public void GoToRank()
     {
-        SceneManager.LoadScene("Rank");
+        SceneManager.LoadScene("RankBeautie");
+        // SceneManager.LoadScene("Rank");
     }
+
 }
