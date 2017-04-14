@@ -8,7 +8,6 @@ public class HighScoreManager : MonoBehaviour
 {
     private string connectionString;
 
-
     private List<HighScore> highScores = new List<HighScore>();
     // 칸 프리팹 연결
     public GameObject scorePrefap;
@@ -38,7 +37,7 @@ public class HighScoreManager : MonoBehaviour
             tmpObjec.GetComponent<HighScoreScript>().SetScore(tmpScore.rank.ToString() , tmpScore.playerName , tmpScore.score.ToString());
 
             tmpObjec.transform.SetParent(scoreParent);
-            tmpObjec.GetComponent<RectTransform>().localScale = new Vector3(1 , 1 , 1);
+            tmpObjec.GetComponent<RectTransform>().localScale = Vector3.one;
         }
     }
 
@@ -54,7 +53,6 @@ public class HighScoreManager : MonoBehaviour
             {
                 // sql문장 = "SELECT 조회할 컬럼 FROM 조회할 테이블";
                 string sqlQuery = "SELECT Player.Player_name,Score.Score_score FROM Score Inner Join Player on Score.Player_id = Player.player_id order by score_score desc limit 10"; // 테이블 두개 조인 시킨 후 score 높은 순으로 정렬한 컬럼중 위에서 다섯개만 출력
-
                 // dbcmd.Connection = dbconn; 위에서 쓰임
                 dbCmd.CommandText = sqlQuery;
 
@@ -69,14 +67,7 @@ public class HighScoreManager : MonoBehaviour
                         string Player_name = reader.GetString(0);
                         int Score_score = reader.GetInt32(1);
 
-                        //HighScore newData = new HighScore(ranksort, Player_name, Score_score);
-                        //newData.rank = ranksort;
-                        //newData.playerName = Player_name;
-                        //newData.score = Score_score;
-                        //highScores.Add(newData);
-
                         highScores.Add(new HighScore(ranksort , Player_name , Score_score));
-                        //Debug.Log("ranksort = " + ranksort + " / Player_name = " + Player_name + " / Score_score =" + Score_score);
                     }
 
                     dbConnection.Close();
