@@ -1,45 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CapsuleFourControl : MonoBehaviour
+public class CapsuleFourControl : MonoBehaviour //, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    // left , bottom은 Negative 
-    //  Input.GetAxis("Vertical") > 0 // gets forward
-    // Input.GetAxis("Vertical") < 0 // gets backward
-    // Input.GetAxis("Horizontal") > 0 // gets right
-    // Input.GetAxis("Horizontal") < 0 // gets left
-
+    public float distanceControl = 1f;
     private Vector3 inputVector;
 
     private void Awake ()
     {
-        inputVector = new Vector3(0 , 0 , 0);
+        inputVector = new Vector3(0,0,0);
     }
-
     public void clickTop ()
     {
-        Debug.Log("ㅇ");
-        
+        inputVector = new Vector3(0,0, distanceControl);
+      
     }
     public void clickLeft ()
     {
-        Debug.Log("ㅇㅇ");
+        inputVector = new Vector3(-distanceControl , 0 , 0);
+       
     }
     public void clickRight ()
     {
-        Debug.Log("ㅇㅇㅇ");
+        inputVector = new Vector3(distanceControl , 0 , 0);
+       
     }
-    public void clickBotton ()
+    public void clickBottom ()
     {
-        Debug.Log("ㅇㅇㅇㅇ");
+        inputVector = new Vector3(0 , 0 , -distanceControl);
+  
     }
 
     public float Horizontal ()
     {
+        Vector3 saveVector = new Vector3(0 , 0 , 0); //
         if ( inputVector.x != 0 )
         {
-            return inputVector.x;
+            saveVector = inputVector; //
+            inputVector = Vector3.zero; //
+            return saveVector.x;
         }
         else
         {
@@ -49,9 +51,12 @@ public class CapsuleFourControl : MonoBehaviour
     }
     public float Vertical ()
     {
+        Vector3 saveVector = new Vector3(0 , 0 , 0); //
         if ( inputVector.z != 0 )
         {
-            return inputVector.z;
+            saveVector = inputVector; //
+            inputVector = Vector3.zero; //
+            return saveVector.z;
         }
         else
         {
