@@ -9,6 +9,9 @@ public class VirtualFourDirections : MonoBehaviour, IDragHandler, IPointerUpHand
     private Image smallStick;
     private Vector3 inputVector;
 
+    public Image ho;
+    public Image ve;
+
     private void Start ()
     {
         // 큰 스틱애 지금 연결된 컴포넌트<이미지>를 집어넣는다
@@ -41,7 +44,7 @@ public class VirtualFourDirections : MonoBehaviour, IDragHandler, IPointerUpHand
             // 빅스틱은 왼쪽 아래 앵커가 좌표의 기준이다
             // inputVector = new Vector3(pos.x * 2 + 1,0,pos.y*2-1); - 앵커가 오른쪽 아래 기준일때
             inputVector = new Vector3(pos.x * 2 - 1 , 0 , pos.y * 2 - 1); // 왼쪽 아래?
-
+            
             // inputVector는 빅스틱의 가운데가 좌표의 기준이다.
             // 조건 ? 참 : 거짓
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
@@ -50,7 +53,15 @@ public class VirtualFourDirections : MonoBehaviour, IDragHandler, IPointerUpHand
             // 스몰스틱의 앵커포인트를 재지정해줌
             // smallStick.rectTransform.anchoredPosition = new Vector3(inputVector.x * (bigStick.rectTransform.sizeDelta.x / 2), inputVector.z * (bigStick.rectTransform.sizeDelta.y / 2));
             smallStick.rectTransform.anchoredPosition = new Vector3(inputVector.x * (bigStick.rectTransform.sizeDelta.x / 3) , inputVector.z * (bigStick.rectTransform.sizeDelta.y / 3));
-            Debug.Log(smallStick.rectTransform.anchoredPosition);
+
+            //---
+            if (smallStick.rectTransform.anchoredPosition.x < ho.transform.position.x )
+            {
+                Debug.Log(smallStick.rectTransform.anchoredPosition);
+            }
+
+            //---
+            
         }
     }
     public float Horizontal()
